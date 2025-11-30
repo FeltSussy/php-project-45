@@ -11,4 +11,5 @@
 [![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=FeltSussy_php-project-45&metric=sqale_rating)](https://sonarcloud.io/summary/new_code?id=FeltSussy_php-project-45)
 [![Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=FeltSussy_php-project-45&metric=vulnerabilities)](https://sonarcloud.io/summary/new_code?id=FeltSussy_php-project-45)
 
-asciinema: https://asciinema.org/a/nnJmMNtAOmlT4llIjncCPpSF0
+brain-even asciinema: https://asciinema.org/a/nnJmMNtAOmlT4llIjncCPpSF0
+brain-calc asciinema: https://asciinema.org/a/h3kJucqkXsYgeKzMshegB6Yjs
