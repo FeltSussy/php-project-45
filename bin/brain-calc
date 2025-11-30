@@ -13,5 +13,11 @@ if (file_exists($autoloadPath1)) {
 use function cli\line;
 use function cli\prompt;
 use function BrainGames\Cli\welcome;
+use function BrainGames\Engine\questionLine;
+use function BrainGames\Engine\run;
 
-welcome();
+$playerName = '';
+welcome($playerName);
+$question = 'What is the result of the expression?';
+questionLine($question);
+run(basename(__FILE__), $playerName);
