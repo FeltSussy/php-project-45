@@ -11,8 +11,5 @@ if (file_exists($autoloadPath1)) {
 }
 
 use function cli\line;
-use function cli\prompt;
-use function BrainGames\Cli\welcome;
 
-$playerName = '';
-welcome($playerName);
+line("Welcome to the Brain Game!");
