@@ -5,19 +5,77 @@ namespace BrainGames\Engine;
 use function cli\line;
 use function cli\prompt;
 
-function questionLine($question)
+function askQuestion($question): void
 {
     line("{$question}");
 }
 
-function generateRand($count, &$randArray)
+function generateRand($count, &$randArray): void
 {
     for ($i = 0; $i < $count; $i++) {
         $randArray[] = rand(1, 100);
     }
 }
 
-function run($gameName, $playerName)
+function findNod($a, $b): int
+{
+    if ($a == 0) {
+        return $b;
+    } elseif ($b == 0) {
+        return $a;
+    }
+
+    while ($b != 0) {
+        $c = $a % $b;
+        $a = $b;
+        $b = $c;
+    }
+    return $a;
+}
+
+function evaluateAnswer($correctAnswer, $answer, $playerName, &$totalCorrectAnswers): void
+{
+    if ($correctAnswer != $answer) {
+        line("Answer '{$answer}' is wrong answer ;(. Correct answer was '{$correctAnswer}'.");
+        line("Let's try again, {$playerName}!");
+        exit;
+    } else {
+        line("Correct!");
+        $totalCorrectAnswers++;
+    }
+
+    if ($totalCorrectAnswers === 3) {
+        line("Congratulations, {$playerName}!");
+    }
+}
+
+function generateProgressionElement($start, $index, $step): int
+{
+    $currentElement = $start + $index * $step;
+    return $currentElement;
+}
+
+function checkPrime($number): bool
+{
+    if ($number < 2) {
+        return false;
+    }
+    if ($number === 2 || $number === 3) {
+        return true;
+    }
+    if ($number % 2 === 0 || $number % 3 === 0) {
+        return false;
+    }
+    $max = (int) sqrt($number);
+    for ($i = 5; $i <= $max; $i += 2) {
+        if ($number % $i == 0) {
+            return false;
+        }
+    }
+    return true;
+}
+
+function run($gameName, $playerName): void
 {
     switch ($gameName) {
         case "brain-even":
@@ -26,24 +84,8 @@ function run($gameName, $playerName)
                 $randomNumber = rand(1, 100);
                 line("Question: {$randomNumber}");
                 $answer = prompt("Your answer");
-                $numberIsEven = $randomNumber % 2 === 0;
-
-                if ($numberIsEven && $answer !== 'yes') {
-                    line("Answer '{$answer}' is wrong answer ;(. Correct answer was 'yes'.");
-                    line("Let's try again, {$playerName}!");
-                    break;
-                } elseif (!$numberIsEven && $answer !== 'no') {
-                    line("Answer '{$answer}' is wrong answer ;(. Correct answer was 'no'.");
-                    line("Let's try again, {$playerName}!");
-                    break;
-                } else {
-                    line("Correct!");
-                    $totalCorrectAnswers++;
-                }
-            }
-
-            if ($totalCorrectAnswers === 3) {
-                line("Congratulations, {$playerName}!");
+                $correctAnswer = ($randomNumber % 2 === 0) ? 'yes' : 'no';
+                evaluateAnswer($correctAnswer, $answer, $playerName, $totalCorrectAnswers);
             }
             break;
         case "brain-calc":
@@ -51,28 +93,62 @@ function run($gameName, $playerName)
             while ($totalCorrectAnswers < 3) {
                 $randArray = [];
                 generateRand(2, $randArray);
+                [$num1, $num2] = $randArray;
                 $operations = ['+', '-', '*'];
                 $operation = $operations[array_rand($operations)];
-                line("Question: $randArray[0] $operation $randArray[1]");
+                line("Question: {$num1} {$operation} {$num2}");
                 $answer = prompt("Your answer");
                 $correctAnswer = match ($operation) {
-                    '+' => $randArray[0] + $randArray[1],
-                    '-' => $randArray[0] - $randArray[1],
-                    '*' => $randArray[0] * $randArray[1],
+                    '+' => $num1 + $num2,
+                    '-' => $num1 - $num2,
+                    '*' => $num1 * $num2,
                 };
-
-                if ($correctAnswer != $answer) {
-                    line("Answer '{$answer}' is wrong answer ;(. Correct answer was '{$correctAnswer}'.");
-                    line("Let's try again, {$playerName}!");
-                    break;
-                } else {
-                    line("Correct!");
-                    $totalCorrectAnswers++;
+                evaluateAnswer($correctAnswer, $answer, $playerName, $totalCorrectAnswers);
+            }
+            break;
+        case "brain-gcd":
+            $totalCorrectAnswers = 0;
+            while ($totalCorrectAnswers < 3) {
+                $randArray = [];
+                generateRand(2, $randArray);
+                [$a, $b] = $randArray;
+                line("Question: {$a} {$b}");
+                $answer = prompt("Your answer");
+                $correctAnswer = findNod($a, $b);
+                evaluateAnswer($correctAnswer, $answer, $playerName, $totalCorrectAnswers);
+            }
+            break;
+        case "brain-progression":
+            $totalCorrectAnswers = 0;
+            while ($totalCorrectAnswers < 3) {
+                $progression = [];
+                $start = rand(1, 20);
+                $step = rand(1, 10);
+                $count = rand(5, 10);
+                for ($i = 0; $i < $count; $i++) {
+                    $progression[] = generateProgressionElement($start, $i, $step);
                 }
-
-                if ($totalCorrectAnswers === 3) {
-                    line("Congratulations, {$playerName}!");
-                }
+                $indexOfHiddenElement = rand(0, $count - 1);
+                $hiddenElement = $progression[$indexOfHiddenElement];
+                $progression[$indexOfHiddenElement] = '..';
+                $showProgression = implode(' ', $progression);
+                line("Question: {$showProgression}");
+                $answer = prompt("Your answer");
+                $correctAnswer = $hiddenElement;
+                evaluateAnswer($correctAnswer, $answer, $playerName, $totalCorrectAnswers);
+            }
+            break;
+        case "brain-prime":
+            $totalCorrectAnswers = 0;
+            while ($totalCorrectAnswers < 3) {
+                $number = rand(1, 100);
+                line("Question: {$number}");
+                $answer = prompt("Your answer");
+                $correctAnswer = match (checkPrime($number)) {
+                    true => 'yes',
+                    false => 'no',
+                };
+                evaluateAnswer($correctAnswer, $answer, $playerName, $totalCorrectAnswers);
             }
             break;
     }

@@ -3,7 +3,10 @@
     "bin": [
       "bin/brain-games",
       "bin/brain-even",
-      "bin/brain-calc"
+      "bin/brain-calc",
+      "bin/brain-gcd",
+      "bin/brain-progression",
+      "bin/brain-prime"
     ],
     "description": "my first hexlet project",
     "autoload": {

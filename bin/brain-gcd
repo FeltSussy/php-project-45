@@ -18,6 +18,6 @@ use function BrainGames\Engine\run;
 
 $playerName = '';
 welcome($playerName);
-$question = 'What is the result of the expression?';
+$question = 'Find the greatest common divisor of given numbers.';
 askQuestion($question);
 run(basename(__FILE__), $playerName);

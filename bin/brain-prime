@@ -18,6 +18,6 @@ use function BrainGames\Engine\run;
 
 $playerName = '';
 welcome($playerName);
-$question = 'What is the result of the expression?';
+$question = 'Answer "yes" if given number is prime. Otherwise answer "no".';
 askQuestion($question);
 run(basename(__FILE__), $playerName);

@@ -13,11 +13,11 @@ if (file_exists($autoloadPath1)) {
 use function cli\line;
 use function cli\prompt;
 use function BrainGames\Cli\welcome;
-use function BrainGames\Engine\questionLine;
+use function BrainGames\Engine\askQuestion;
 use function BrainGames\Engine\run;
 
 $playerName = '';
 welcome($playerName);
 $question = 'Answer "yes" if the number is even, otherwise answer "no".';
-questionLine($question);
+askQuestion($question);
 run(basename(__FILE__), $playerName);
