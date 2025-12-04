@@ -14,7 +14,7 @@ function askQuestion(string $question): void
 function generateRand(int $count, array &$randArray): void
 {
     for ($i = 0; $i < $count; $i++) {
-        $randArray[] = rand(1, 100);
+        $randArray[] = random_int(1, 100);
     }
 }
 
@@ -77,7 +77,7 @@ function runBrainEven(string $playerName): void
 {
     $totalCorrectAnswers = 0;
     while ($totalCorrectAnswers < 3) {
-        $randomNumber = rand(1, 100);
+        $randomNumber = random_int(1, 100);
         line("Question: {$randomNumber}");
         $answer = prompt(ANSWER_PROMPT);
         $correctAnswer = ($randomNumber % 2 === 0) ? 'yes' : 'no';
@@ -124,13 +124,13 @@ function runBrainProgression(string $playerName): void
     $totalCorrectAnswers = 0;
     while ($totalCorrectAnswers < 3) {
         $progression = [];
-        $start = rand(1, 20);
-        $step = rand(1, 10);
-        $count = rand(5, 10);
+        $start = random_int(1, 20);
+        $step = random_int(1, 10);
+        $count = random_int(5, 10);
         for ($i = 0; $i < $count; $i++) {
             $progression[] = generateProgressionElement($start, $i, $step);
         }
-        $indexOfHiddenElement = rand(0, $count - 1);
+        $indexOfHiddenElement = random_int(0, $count - 1);
         $hiddenElement = $progression[$indexOfHiddenElement];
         $progression[$indexOfHiddenElement] = '..';
         $showProgression = implode(' ', $progression);
@@ -145,7 +145,7 @@ function runBrainPrime(string $playerName): void
 {
     $totalCorrectAnswers = 0;
     while ($totalCorrectAnswers < 3) {
-        $number = rand(1, 100);
+        $number = random_int(1, 100);
         line("Question: {$number}");
         $answer = prompt(ANSWER_PROMPT);
         $correctAnswer = match (checkPrime($number)) {
