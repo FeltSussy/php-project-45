@@ -57,7 +57,7 @@ function generateProgressionElement(int $start, int $index, int $step): int
 
 function checkPrime(int $number): bool
 {
-    $result = null;
+    $result = false;
     if ($number < 2 || $number % 2 === 0 || $number % 3 === 0) {
         $result = false;
     }
