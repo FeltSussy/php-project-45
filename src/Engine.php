@@ -5,6 +5,7 @@ namespace BrainGames\Engine;
 use function cli\line;
 use function cli\prompt;
 
+define('ANSWER_PROMPT', "Your answer");
 function askQuestion(string $question): void
 {
     line("{$question}");
@@ -78,7 +79,7 @@ function runBrainEven(string $playerName): void
     while ($totalCorrectAnswers < 3) {
         $randomNumber = rand(1, 100);
         line("Question: {$randomNumber}");
-        $answer = prompt("Your answer");
+        $answer = prompt(ANSWER_PROMPT);
         $correctAnswer = ($randomNumber % 2 === 0) ? 'yes' : 'no';
         evaluateAnswer($correctAnswer, $answer, $playerName, $totalCorrectAnswers);
     }
@@ -94,7 +95,7 @@ function runBrainCalc(string $playerName): void
         $operations = ['+', '-', '*'];
         $operation = $operations[array_rand($operations)];
         line("Question: {$num1} {$operation} {$num2}");
-        $answer = prompt("Your answer");
+        $answer = prompt(ANSWER_PROMPT);
         $correctAnswer = match ($operation) {
             '+' => (string) ($num1 + $num2),
             '-' => (string) ($num1 - $num2),
@@ -112,7 +113,7 @@ function runBrainGcd(string $playerName): void
         generateRand(2, $randArray);
         [$a, $b] = $randArray;
         line("Question: {$a} {$b}");
-        $answer = prompt("Your answer");
+        $answer = prompt(ANSWER_PROMPT);
         $correctAnswer = (string) findNod($a, $b);
         evaluateAnswer($correctAnswer, $answer, $playerName, $totalCorrectAnswers);
     }
@@ -134,7 +135,7 @@ function runBrainProgression(string $playerName): void
         $progression[$indexOfHiddenElement] = '..';
         $showProgression = implode(' ', $progression);
         line("Question: {$showProgression}");
-        $answer = prompt("Your answer");
+        $answer = prompt(ANSWER_PROMPT);
         $correctAnswer = (string) $hiddenElement;
         evaluateAnswer($correctAnswer, $answer, $playerName, $totalCorrectAnswers);
     }
@@ -146,7 +147,7 @@ function runBrainPrime(string $playerName): void
     while ($totalCorrectAnswers < 3) {
         $number = rand(1, 100);
         line("Question: {$number}");
-        $answer = prompt("Your answer");
+        $answer = prompt(ANSWER_PROMPT);
         $correctAnswer = match (checkPrime($number)) {
             true => 'yes',
             false => 'no',
@@ -154,4 +155,3 @@ function runBrainPrime(string $playerName): void
         evaluateAnswer($correctAnswer, $answer, $playerName, $totalCorrectAnswers);
     }
 }
-
