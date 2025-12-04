@@ -25,7 +25,7 @@ function findNod(int $a, int $b): int
         return $a;
     }
 
-    while ($b != 0) {
+    while ($b !== 0) {
         $c = $a % $b;
         $a = $b;
         $b = $c;
@@ -33,7 +33,7 @@ function findNod(int $a, int $b): int
     return $a;
 }
 
-function evaluateAnswer(string $correctAnswer, string $answer, string $playerName, int &$totalCorrectAnswers): void
+function evaluateAnswer(mixed $correctAnswer, mixed $answer, string $playerName, int &$totalCorrectAnswers): void
 {
     if ($correctAnswer !== $answer) {
         line("Answer '{$answer}' is wrong answer ;(. Correct answer was '{$correctAnswer}'.");
