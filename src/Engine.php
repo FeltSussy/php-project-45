@@ -5,23 +5,23 @@ namespace BrainGames\Engine;
 use function cli\line;
 use function cli\prompt;
 
-function askQuestion($question): void
+function askQuestion(string $question): void
 {
     line("{$question}");
 }
 
-function generateRand($count, &$randArray): void
+function generateRand(int $count, array &$randArray): void
 {
     for ($i = 0; $i < $count; $i++) {
         $randArray[] = rand(1, 100);
     }
 }
 
-function findNod($a, $b): int
+function findNod(int $a, int $b): int
 {
-    if ($a == 0) {
+    if ($a === 0) {
         return $b;
-    } elseif ($b == 0) {
+    } elseif ($b === 0) {
         return $a;
     }
 
@@ -33,9 +33,9 @@ function findNod($a, $b): int
     return $a;
 }
 
-function evaluateAnswer($correctAnswer, $answer, $playerName, &$totalCorrectAnswers): void
+function evaluateAnswer(string $correctAnswer, string $answer, string $playerName, int &$totalCorrectAnswers): void
 {
-    if ($correctAnswer != $answer) {
+    if ($correctAnswer !== $answer) {
         line("Answer '{$answer}' is wrong answer ;(. Correct answer was '{$correctAnswer}'.");
         line("Let's try again, {$playerName}!");
         exit;
@@ -49,13 +49,13 @@ function evaluateAnswer($correctAnswer, $answer, $playerName, &$totalCorrectAnsw
     }
 }
 
-function generateProgressionElement($start, $index, $step): int
+function generateProgressionElement(int $start, int $index, int $step): int
 {
     $currentElement = $start + $index * $step;
     return $currentElement;
 }
 
-function checkPrime($number): bool
+function checkPrime(int $number): bool
 {
     if ($number < 2) {
         return false;
@@ -68,14 +68,14 @@ function checkPrime($number): bool
     }
     $max = (int) sqrt($number);
     for ($i = 5; $i <= $max; $i += 2) {
-        if ($number % $i == 0) {
+        if ($number % $i === 0) {
             return false;
         }
     }
     return true;
 }
 
-function run($gameName, $playerName): void
+function run(string $gameName, string $playerName): void
 {
     switch ($gameName) {
         case "brain-even":
