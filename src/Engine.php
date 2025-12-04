@@ -51,20 +51,16 @@ function evaluateAnswer(string $correctAnswer, string $answer, string $playerNam
 
 function generateProgressionElement(int $start, int $index, int $step): int
 {
-    $currentElement = $start + $index * $step;
-    return $currentElement;
+    return $start + $index * $step;
 }
 
 function checkPrime(int $number): bool
 {
-    if ($number < 2) {
+    if ($number < 2 || $number % 2 === 0 || $number % 3 === 0) {
         return false;
     }
     if ($number === 2 || $number === 3) {
         return true;
-    }
-    if ($number % 2 === 0 || $number % 3 === 0) {
-        return false;
     }
     $max = (int) sqrt($number);
     for ($i = 5; $i <= $max; $i += 2) {
