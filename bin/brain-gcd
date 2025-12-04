@@ -14,9 +14,9 @@ use function cli\line;
 use function cli\prompt;
 use function BrainGames\Cli\welcome;
 use function BrainGames\Engine\askQuestion;
-use function BrainGames\Engine\run;
+use function BrainGames\Engine\runBrainGcd;
 
 $playerName = welcome();
 $question = 'Find the greatest common divisor of given numbers.';
 askQuestion($question);
-run(basename(__FILE__), $playerName);
+runBrainGcd($playerName);

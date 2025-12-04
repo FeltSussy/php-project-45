@@ -56,96 +56,102 @@ function generateProgressionElement(int $start, int $index, int $step): int
 
 function checkPrime(int $number): bool
 {
+    $result = null;
     if ($number < 2 || $number % 2 === 0 || $number % 3 === 0) {
-        return false;
+        $result = false;
     }
     if ($number === 2 || $number === 3) {
-        return true;
+        $result = true;
     }
     $max = (int) sqrt($number);
     for ($i = 5; $i <= $max; $i += 2) {
         if ($number % $i === 0) {
-            return false;
+            $result = false;
         }
     }
-    return true;
+    return $result;
 }
 
-function run(string $gameName, string $playerName): void
+function runBrainEven(string $playerName): void
 {
-    switch ($gameName) {
-        case "brain-even":
-            $totalCorrectAnswers = 0;
-            while ($totalCorrectAnswers < 3) {
-                $randomNumber = rand(1, 100);
-                line("Question: {$randomNumber}");
-                $answer = prompt("Your answer");
-                $correctAnswer = ($randomNumber % 2 === 0) ? 'yes' : 'no';
-                evaluateAnswer($correctAnswer, $answer, $playerName, $totalCorrectAnswers);
-            }
-            break;
-        case "brain-calc":
-            $totalCorrectAnswers = 0;
-            while ($totalCorrectAnswers < 3) {
-                $randArray = [];
-                generateRand(2, $randArray);
-                [$num1, $num2] = $randArray;
-                $operations = ['+', '-', '*'];
-                $operation = $operations[array_rand($operations)];
-                line("Question: {$num1} {$operation} {$num2}");
-                $answer = prompt("Your answer");
-                $correctAnswer = match ($operation) {
-                    '+' => (string) ($num1 + $num2),
-                    '-' => (string) ($num1 - $num2),
-                    '*' => (string) ($num1 * $num2),
-                };
-                evaluateAnswer($correctAnswer, $answer, $playerName, $totalCorrectAnswers);
-            }
-            break;
-        case "brain-gcd":
-            $totalCorrectAnswers = 0;
-            while ($totalCorrectAnswers < 3) {
-                $randArray = [];
-                generateRand(2, $randArray);
-                [$a, $b] = $randArray;
-                line("Question: {$a} {$b}");
-                $answer = prompt("Your answer");
-                $correctAnswer = (string) findNod($a, $b);
-                evaluateAnswer($correctAnswer, $answer, $playerName, $totalCorrectAnswers);
-            }
-            break;
-        case "brain-progression":
-            $totalCorrectAnswers = 0;
-            while ($totalCorrectAnswers < 3) {
-                $progression = [];
-                $start = rand(1, 20);
-                $step = rand(1, 10);
-                $count = rand(5, 10);
-                for ($i = 0; $i < $count; $i++) {
-                    $progression[] = generateProgressionElement($start, $i, $step);
-                }
-                $indexOfHiddenElement = rand(0, $count - 1);
-                $hiddenElement = $progression[$indexOfHiddenElement];
-                $progression[$indexOfHiddenElement] = '..';
-                $showProgression = implode(' ', $progression);
-                line("Question: {$showProgression}");
-                $answer = prompt("Your answer");
-                $correctAnswer = (string) $hiddenElement;
-                evaluateAnswer($correctAnswer, $answer, $playerName, $totalCorrectAnswers);
-            }
-            break;
-        case "brain-prime":
-            $totalCorrectAnswers = 0;
-            while ($totalCorrectAnswers < 3) {
-                $number = rand(1, 100);
-                line("Question: {$number}");
-                $answer = prompt("Your answer");
-                $correctAnswer = match (checkPrime($number)) {
-                    true => 'yes',
-                    false => 'no',
-                };
-                evaluateAnswer($correctAnswer, $answer, $playerName, $totalCorrectAnswers);
-            }
-            break;
+    $totalCorrectAnswers = 0;
+    while ($totalCorrectAnswers < 3) {
+        $randomNumber = rand(1, 100);
+        line("Question: {$randomNumber}");
+        $answer = prompt("Your answer");
+        $correctAnswer = ($randomNumber % 2 === 0) ? 'yes' : 'no';
+        evaluateAnswer($correctAnswer, $answer, $playerName, $totalCorrectAnswers);
     }
 }
+
+function runBrainCalc(string $playerName): void
+{
+    $totalCorrectAnswers = 0;
+    while ($totalCorrectAnswers < 3) {
+        $randArray = [];
+        generateRand(2, $randArray);
+        [$num1, $num2] = $randArray;
+        $operations = ['+', '-', '*'];
+        $operation = $operations[array_rand($operations)];
+        line("Question: {$num1} {$operation} {$num2}");
+        $answer = prompt("Your answer");
+        $correctAnswer = match ($operation) {
+            '+' => (string) ($num1 + $num2),
+            '-' => (string) ($num1 - $num2),
+            '*' => (string) ($num1 * $num2),
+        };
+        evaluateAnswer($correctAnswer, $answer, $playerName, $totalCorrectAnswers);
+    }
+}
+
+function runBrainGcd(string $playerName): void
+{
+    $totalCorrectAnswers = 0;
+    while ($totalCorrectAnswers < 3) {
+        $randArray = [];
+        generateRand(2, $randArray);
+        [$a, $b] = $randArray;
+        line("Question: {$a} {$b}");
+        $answer = prompt("Your answer");
+        $correctAnswer = (string) findNod($a, $b);
+        evaluateAnswer($correctAnswer, $answer, $playerName, $totalCorrectAnswers);
+    }
+}
+
+function runBrainProgression(string $playerName): void
+{
+    $totalCorrectAnswers = 0;
+    while ($totalCorrectAnswers < 3) {
+        $progression = [];
+        $start = rand(1, 20);
+        $step = rand(1, 10);
+        $count = rand(5, 10);
+        for ($i = 0; $i < $count; $i++) {
+            $progression[] = generateProgressionElement($start, $i, $step);
+        }
+        $indexOfHiddenElement = rand(0, $count - 1);
+        $hiddenElement = $progression[$indexOfHiddenElement];
+        $progression[$indexOfHiddenElement] = '..';
+        $showProgression = implode(' ', $progression);
+        line("Question: {$showProgression}");
+        $answer = prompt("Your answer");
+        $correctAnswer = (string) $hiddenElement;
+        evaluateAnswer($correctAnswer, $answer, $playerName, $totalCorrectAnswers);
+    }
+}
+
+function runBrainPrime(string $playerName): void
+{
+    $totalCorrectAnswers = 0;
+    while ($totalCorrectAnswers < 3) {
+        $number = rand(1, 100);
+        line("Question: {$number}");
+        $answer = prompt("Your answer");
+        $correctAnswer = match (checkPrime($number)) {
+            true => 'yes',
+            false => 'no',
+        };
+        evaluateAnswer($correctAnswer, $answer, $playerName, $totalCorrectAnswers);
+    }
+}
+

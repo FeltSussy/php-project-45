@@ -14,9 +14,9 @@ use function cli\line;
 use function cli\prompt;
 use function BrainGames\Cli\welcome;
 use function BrainGames\Engine\askQuestion;
-use function BrainGames\Engine\run;
+use function BrainGames\Engine\runBrainCalc;
 
 $playerName = welcome();
 $question = 'What is the result of the expression?';
 askQuestion($question);
-run(basename(__FILE__), $playerName);
+runBrainCalc($playerName);
