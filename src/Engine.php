@@ -33,7 +33,7 @@ function findNod(int $a, int $b): int
     return $a;
 }
 
-function evaluateAnswer(mixed $correctAnswer, mixed $answer, string $playerName, int &$totalCorrectAnswers): void
+function evaluateAnswer(string $correctAnswer, string $answer, string $playerName, int &$totalCorrectAnswers): void
 {
     if ($correctAnswer !== $answer) {
         line("Answer '{$answer}' is wrong answer ;(. Correct answer was '{$correctAnswer}'.");
@@ -99,9 +99,9 @@ function run(string $gameName, string $playerName): void
                 line("Question: {$num1} {$operation} {$num2}");
                 $answer = prompt("Your answer");
                 $correctAnswer = match ($operation) {
-                    '+' => $num1 + $num2,
-                    '-' => $num1 - $num2,
-                    '*' => $num1 * $num2,
+                    '+' => (string) ($num1 + $num2),
+                    '-' => (string) ($num1 - $num2),
+                    '*' => (string) ($num1 * $num2),
                 };
                 evaluateAnswer($correctAnswer, $answer, $playerName, $totalCorrectAnswers);
             }
@@ -114,7 +114,7 @@ function run(string $gameName, string $playerName): void
                 [$a, $b] = $randArray;
                 line("Question: {$a} {$b}");
                 $answer = prompt("Your answer");
-                $correctAnswer = findNod($a, $b);
+                $correctAnswer = (string) findNod($a, $b);
                 evaluateAnswer($correctAnswer, $answer, $playerName, $totalCorrectAnswers);
             }
             break;
@@ -134,7 +134,7 @@ function run(string $gameName, string $playerName): void
                 $showProgression = implode(' ', $progression);
                 line("Question: {$showProgression}");
                 $answer = prompt("Your answer");
-                $correctAnswer = $hiddenElement;
+                $correctAnswer = (string) $hiddenElement;
                 evaluateAnswer($correctAnswer, $answer, $playerName, $totalCorrectAnswers);
             }
             break;
