@@ -16,8 +16,7 @@ use function BrainGames\Cli\welcome;
 use function BrainGames\Engine\askQuestion;
 use function BrainGames\Engine\run;
 
-$playerName = '';
-welcome($playerName);
+$playerName = welcome();
 $question = 'Answer "yes" if given number is prime. Otherwise answer "no".';
 askQuestion($question);
 run(basename(__FILE__), $playerName);

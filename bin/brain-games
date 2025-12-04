@@ -12,5 +12,4 @@ if (file_exists($autoloadPath1)) {
 
 use function BrainGames\Cli\welcome;
 
-$playerName;
-welcome($playerName);
+$playerName = welcome();
