@@ -8,7 +8,7 @@ use function BrainGames\Engine\evaluateAnswer;
 
 function checkPrime(int $number): bool
 {
-    $result = false;
+    $result = true;
     if ($number < 2 || $number % 2 === 0 || $number % 3 === 0) {
         $result = false;
     }
