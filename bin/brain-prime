@@ -10,13 +10,12 @@ if (file_exists($autoloadPath1)) {
     require_once $autoloadPath2;
 }
 
-use function cli\line;
-use function cli\prompt;
 use function BrainGames\Cli\welcome;
 use function BrainGames\Engine\askQuestion;
-use function BrainGames\Engine\runBrainPrime;
+use function BrainGames\Games\Prime\runBrainPrime;
 
 $playerName = welcome();
 $question = 'Answer "yes" if given number is prime. Otherwise answer "no".';
 askQuestion($question);
 runBrainPrime($playerName);
+
