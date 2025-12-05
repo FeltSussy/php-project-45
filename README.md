@@ -37,10 +37,7 @@ make install
 
 ## Run game
 
-```bash
-make [game]
-```
-For example:
+"Calculator"
 
 ```bash
 make brain-calc
