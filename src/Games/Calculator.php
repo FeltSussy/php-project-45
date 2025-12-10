@@ -12,7 +12,7 @@ function runBrainCalc(): void
     $numbers = generateRand(6);
     $operators = ['+', '-', '*'];
     $operations = [];
-    while (\count($operations) != ROUNDS) {
+    while (\count($operations) !== ROUNDS) {
          $operations[] = $operators[array_rand($operators, 1)];
     }
     $questions = [];
@@ -34,6 +34,7 @@ function runBrainCalc(): void
 
 function generateRand(int $count): array
 {
+    $array = [];
     for ($i = 0; $i < $count; $i++) {
         $array[] = random_int(1, 100);
     }
@@ -46,5 +47,6 @@ function calculate(int $num1, int $num2, string $operator): int
         '+' => $num1 + $num2,
         '-' => $num1 - $num2,
         '*' => $num1 * $num2,
+        default => "Allowed operators: '+', '-', '*'",
     };
 }

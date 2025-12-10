@@ -42,6 +42,7 @@ function findGcd(int $firstNumber, int $secondNumber): int
 
 function generateRand(int $count): array
 {
+    $array = [];
     for ($i = 0; $i < $count; $i++) {
         $array[] = random_int(1, 100);
     }
