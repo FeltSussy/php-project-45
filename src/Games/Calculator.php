@@ -2,27 +2,49 @@
 
 namespace BrainGames\Games\Calc;
 
-use function cli\line;
-use function cli\prompt;
-use function BrainGames\Engine\generateRand;
-use function BrainGames\Engine\evaluateAnswer;
+use function BrainGames\Engine\runGame;
 
-function runBrainCalc(string $playerName): void
+use const BrainGames\Engine\ROUNDS;
+
+function runBrainCalc(): void
 {
-    $totalCorrectAnswers = 0;
-    while ($totalCorrectAnswers < 3) {
-        $numbers = [];
-        generateRand(2, $numbers);
-        [$num1, $num2] = $numbers;
-        $operations = ['+', '-', '*'];
-        $operation = $operations[array_rand($operations)];
-        line("Question: {$num1} {$operation} {$num2}");
-        $answer = prompt(ANSWER_PROMPT);
-        $correctAnswer = match ($operation) {
-            '+' => (string) ($num1 + $num2),
-            '-' => (string) ($num1 - $num2),
-            '*' => (string) ($num1 * $num2),
-        };
-        evaluateAnswer($correctAnswer, $answer, $playerName, $totalCorrectAnswers);
+    $task = 'What is the result of the expression?';
+    $numbers = generateRand(6);
+    $operators = ['+', '-', '*'];
+    $operations = [];
+    while (\count($operations) != ROUNDS) {
+         $operations[] = $operators[array_rand($operators, 1)];
     }
+    $questions = [];
+    $correctAnswers = [];
+
+    for ($a = 0, $b = 1, $c = 0; $c < ROUNDS; $a += 2, $b += 2, $c++) {
+        $questions[] = match ($operations[$c]) {
+            '+' => "{$numbers[$a]} + {$numbers[$b]}",
+            '-' => "{$numbers[$a]} - {$numbers[$b]}",
+            '*' => "{$numbers[$a]} * {$numbers[$b]}",
+        };
+    };
+
+    for ($a = 0, $b = 1, $c = 0; $c < ROUNDS; $a += 2, $b += 2, $c++) {
+        $correctAnswers[] = (string) calculate($numbers[$a], $numbers[$b], $operations[$c]);
+    };
+    runGame($task, $correctAnswers, $questions);
+}
+
+function generateRand(int $count): array
+{
+    for ($i = 0; $i < $count; $i++) {
+        $array[] = random_int(1, 100);
+    }
+    return $array;
+}
+
+function calculate(int $num1, int $num2, string $operator): int
+{
+    return match ($operator) {
+        '+' => $num1 + $num2,
+        '-' => $num1 - $num2,
+        '*' => $num1 * $num2,
+    };
 }

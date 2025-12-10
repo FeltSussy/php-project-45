@@ -19,7 +19,7 @@ A five-game console collection modeled on popular brain-training apps. Answer qu
 
 
 * Linux, Macos, WSL
-* PHP >=7.2.24
+* PHP >=8.0
 * Make
 * Git
 
@@ -47,20 +47,20 @@ make brain-calc
 
 "Calculator" (brain-calc)
 * Solve a mathematical expression.
-[![asciicast](https://asciinema.org/a/h3kJucqkXsYgeKzMshegB6Yjs.svg)](https://asciinema.org/a/h3kJucqkXsYgeKzMshegB6Yjs)
+[![asciicast](https://asciinema.org/a/xerykaLZjrD18iHXaypOpmwwn.svg)](https://asciinema.org/a/xerykaLZjrD18iHXaypOpmwwn)
 
 "Progression" (brain-progression)
 * Determine the missing number in the progression.
-[![asciicast](https://asciinema.org/a/eIIOPcflZgJ9xXwUe37ITVp5K.svg)](https://asciinema.org/a/eIIOPcflZgJ9xXwUe37ITVp5K)
+[![asciicast](https://asciinema.org/a/8gtVrNNPzbjst8ltIV7MUzeHq.svg)](https://asciinema.org/a/8gtVrNNPzbjst8ltIV7MUzeHq)
 
 "Even Number" (brain-even)
 * Determine whether the number is even or not.
-[![asciicast](https://asciinema.org/a/nnJmMNtAOmlT4llIjncCPpSF0.svg)](https://asciinema.org/a/nnJmMNtAOmlT4llIjncCPpSF0)
+[![asciicast](https://asciinema.org/a/F5p8jvX4XEkdOdUQ8PsGZrR4e.svg)](https://asciinema.org/a/F5p8jvX4XEkdOdUQ8PsGZrR4e)
 
 "Greatest Common Divisor" (brain-gcd)
 * Find the largest number that divides both numbers.
-[![asciicast](https://asciinema.org/a/ucbKw18MzBfuDytk0BO7MLqHz.svg)](https://asciinema.org/a/ucbKw18MzBfuDytk0BO7MLqHz)
+[![asciicast](https://asciinema.org/a/h9qRAzri7kC8dIjascuxtRAIb.svg)](https://asciinema.org/a/h9qRAzri7kC8dIjascuxtRAIb)
 
 "Prime Number" (brain-prime)
 * Determine whether the number is prime or not.
-[![asciicast](https://asciinema.org/a/q8MpuGGHb7uR9XKA5i6X9YFmi.svg)](https://asciinema.org/a/q8MpuGGHb7uR9XKA5i6X9YFmi)
+[![asciicast](https://asciinema.org/a/k5ZYXpEAc2F0FhBC1kljLEcIS.svg)](https://asciinema.org/a/k5ZYXpEAc2F0FhBC1kljLEcIS)

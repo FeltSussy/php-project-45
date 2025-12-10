@@ -2,12 +2,29 @@
 
 namespace BrainGames\Games\Gcd;
 
-use function cli\line;
-use function cli\prompt;
-use function BrainGames\Engine\generateRand;
-use function BrainGames\Engine\evaluateAnswer;
+use function BrainGames\Engine\runGame;
 
-function findNod(int $firstNumber, int $secondNumber): int
+use const BrainGames\Engine\ROUNDS;
+
+function runBrainGcd(): void
+{
+    $task = 'Find the greatest common divisor of given numbers.';
+    $numbers = generateRand(6);
+    $questions = [];
+
+    for ($i = 0, $a = 0, $b = 1; $i < ROUNDS; $i++, $a += 2, $b += 2) {
+        $questions[] = "{$numbers[$a]} {$numbers[$b]}";
+    }
+
+    $correctAnswers = [];
+
+    for ($i = 0, $a = 0, $b = 1; $i < ROUNDS; $i++, $a += 2, $b += 2) {
+        $correctAnswers[] = (string) findGcd($numbers[$a], $numbers[$b]);
+    };
+    runGame($task, $correctAnswers, $questions);
+}
+
+function findGcd(int $firstNumber, int $secondNumber): int
 {
     if ($firstNumber === 0) {
         return $secondNumber;
@@ -23,16 +40,10 @@ function findNod(int $firstNumber, int $secondNumber): int
     return $firstNumber;
 }
 
-function runBrainGcd(string $playerName): void
+function generateRand(int $count): array
 {
-    $totalCorrectAnswers = 0;
-    while ($totalCorrectAnswers < 3) {
-        $numbers = [];
-        generateRand(2, $numbers);
-        [$num1, $num2] = $numbers;
-        line("Question: {$num1} {$num2}");
-        $answer = prompt(ANSWER_PROMPT);
-        $correctAnswer = (string) findNod($num1, $num2);
-        evaluateAnswer($correctAnswer, $answer, $playerName, $totalCorrectAnswers);
+    for ($i = 0; $i < $count; $i++) {
+        $array[] = random_int(1, 100);
     }
+    return $array;
 }

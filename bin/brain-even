@@ -10,11 +10,6 @@ if (file_exists($autoloadPath1)) {
     require_once $autoloadPath2;
 }
 
-use function BrainGames\Cli\welcome;
-use function BrainGames\Engine\askQuestion;
 use function BrainGames\Games\Even\runBrainEven;
 
-$playerName = welcome();
-$question = 'Answer "yes" if the number is even, otherwise answer "no".';
-askQuestion($question);
-runBrainEven($playerName);
+runBrainEven();

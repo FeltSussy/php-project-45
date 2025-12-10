@@ -10,11 +10,6 @@ if (file_exists($autoloadPath1)) {
     require_once $autoloadPath2;
 }
 
-use function BrainGames\Cli\welcome;
-use function BrainGames\Engine\askQuestion;
 use function BrainGames\Games\Progression\runBrainProgression;
 
-$playerName = welcome();
-$question = 'What number is missing in the progression?';
-askQuestion($question);
-runBrainProgression($playerName);
+runBrainProgression();

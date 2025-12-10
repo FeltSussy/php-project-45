@@ -5,31 +5,30 @@ namespace BrainGames\Engine;
 use function cli\line;
 use function cli\prompt;
 
-define('ANSWER_PROMPT', "Your answer");
-function askQuestion(string $question): void
-{
-    line("{$question}");
-}
+const ANSWER_PROMPT = "Your answer";
+const ROUNDS = 3;
 
-function generateRand(int $count, array &$targetArray): void
+function runGame(string $task, array $correctAnswers, array $questions): void
 {
-    for ($i = 0; $i < $count; $i++) {
-        $targetArray[] = random_int(1, 100);
-    }
-}
+    line('Welcome to the Brain Games!');
+    $playerName = prompt('May I have your name?');
+    line("Hello, %s!", $playerName);
+    line("{$task}");
+    $totalCorrectAnswers = 0;
+    for ($i = 0; $i < ROUNDS; $i++) {
+        line("Question: {$questions[$i]}");
+        $answer = prompt(ANSWER_PROMPT);
+        if ($correctAnswers[$i] !== $answer) {
+            line("Answer '{$answer}' is wrong answer ;(. Correct answer was '{$correctAnswers[$i]}'.");
+            line("Let's try again, {$playerName}!");
+            exit;
+        } else {
+            line("Correct!");
+            $totalCorrectAnswers++;
+        }
 
-function evaluateAnswer(string $correctAnswer, string $answer, string $playerName, int &$totalCorrectAnswers): void
-{
-    if ($correctAnswer !== $answer) {
-        line("Answer '{$answer}' is wrong answer ;(. Correct answer was '{$correctAnswer}'.");
-        line("Let's try again, {$playerName}!");
-        exit;
-    } else {
-        line("Correct!");
-        $totalCorrectAnswers++;
-    }
-
-    if ($totalCorrectAnswers === 3) {
-        line("Congratulations, {$playerName}!");
+        if ($totalCorrectAnswers === 3) {
+            line("Congratulations, {$playerName}!");
+        }
     }
 }

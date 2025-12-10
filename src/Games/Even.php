@@ -2,18 +2,22 @@
 
 namespace BrainGames\Games\Even;
 
-use function cli\line;
-use function cli\prompt;
-use function BrainGames\Engine\evaluateAnswer;
+use function BrainGames\Engine\runGame;
 
-function runBrainEven(string $playerName): void
+use const BrainGames\Engine\ROUNDS;
+
+function runBrainEven(): void
 {
-    $totalCorrectAnswers = 0;
-    while ($totalCorrectAnswers < 3) {
-        $randomNumber = random_int(1, 100);
-        line("Question: {$randomNumber}");
-        $answer = prompt(ANSWER_PROMPT);
-        $correctAnswer = ($randomNumber % 2 === 0) ? 'yes' : 'no';
-        evaluateAnswer($correctAnswer, $answer, $playerName, $totalCorrectAnswers);
-    }
+    $task = 'Answer "yes" if the number is even, otherwise answer "no".';
+    $questions = [
+        random_int(1, 100),
+        random_int(1, 100),
+        random_int(1, 100)
+    ];
+    $correctAnswers = [
+        ($questions[0] % 2 === 0) ? 'yes' : 'no',
+        ($questions[1] % 2 === 0) ? 'yes' : 'no',
+        ($questions[2] % 2 === 0) ? 'yes' : 'no'
+    ];
+    runGame($task, $correctAnswers, $questions);
 }

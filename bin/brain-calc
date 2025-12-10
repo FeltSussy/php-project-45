@@ -10,11 +10,6 @@ if (file_exists($autoloadPath1)) {
     require_once $autoloadPath2;
 }
 
-use function BrainGames\Cli\welcome;
-use function BrainGames\Engine\askQuestion;
 use function BrainGames\Games\Calc\runBrainCalc;
 
-$playerName = welcome();
-$question = 'What is the result of the expression?';
-askQuestion($question);
-runBrainCalc($playerName);
+runBrainCalc();

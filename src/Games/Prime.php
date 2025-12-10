@@ -2,11 +2,29 @@
 
 namespace BrainGames\Games\Prime;
 
-use function cli\line;
-use function cli\prompt;
-use function BrainGames\Engine\evaluateAnswer;
+use function BrainGames\Engine\runGame;
 
-function checkPrime(int $number): bool
+use const BrainGames\Engine\ROUNDS;
+
+function runBrainPrime(): void
+{
+    $task = 'Answer "yes" if given number is prime. Otherwise answer "no".';
+    $questions = [
+        random_int(1, 100),
+        random_int(1, 100),
+        random_int(1, 100)
+    ];
+    $correctAnswers = [];
+    for ($i = 0; $i < ROUNDS; $i++) {
+        $correctAnswers[] = match (isPrime($questions[$i])) {
+            true => 'yes',
+            false => 'no',
+        };
+    };
+    runGame($task, $correctAnswers, $questions);
+}
+
+function isPrime(int $number): bool
 {
     $result = true;
     if ($number < 2 || $number % 2 === 0 || $number % 3 === 0) {
@@ -22,19 +40,4 @@ function checkPrime(int $number): bool
         }
     }
     return $result;
-}
-
-function runBrainPrime(string $playerName): void
-{
-    $totalCorrectAnswers = 0;
-    while ($totalCorrectAnswers < 3) {
-        $number = random_int(1, 100);
-        line("Question: {$number}");
-        $answer = prompt(ANSWER_PROMPT);
-        $correctAnswer = match (checkPrime($number)) {
-            true => 'yes',
-            false => 'no',
-        };
-        evaluateAnswer($correctAnswer, $answer, $playerName, $totalCorrectAnswers);
-    }
 }
