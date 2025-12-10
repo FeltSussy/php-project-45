@@ -41,7 +41,7 @@ function generateRand(int $count): array
     return $array;
 }
 
-function calculate(int $num1, int $num2, string $operator): int
+function calculate(int $num1, int $num2, string $operator): int|string
 {
     return match ($operator) {
         '+' => $num1 + $num2,
