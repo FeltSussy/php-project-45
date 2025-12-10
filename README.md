@@ -30,7 +30,7 @@ Setup [SSH](https://docs.github.com/en/authentication/connecting-to-github-with-
 
 ```bash
 git clone git@github.com:FeltSussy/php-project-45.git
-cd php-package
+cd php-project-45
 
 make install
 ```
