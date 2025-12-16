@@ -3,10 +3,11 @@
 namespace BrainGames\Games\Calc;
 
 use Exception;
+
 use function BrainGames\Engine\runGame;
 
 const GAME_DESCRIPTION = 'What is the result of the expression?';
-CONST OPERATORS = ['+', '-', '*'];
+const OPERATORS = ['+', '-', '*'];
 const ROUNDS = 3;
 
 function run(): void

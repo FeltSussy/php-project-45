@@ -15,7 +15,12 @@ function runGame(string $description, array $correctAnswers, array $questions)
         line("Question: %s", $questions[$key]);
         $answer = prompt("Your answer");
         if ($correctAnswer !== $answer) {
-            return line("Answer '%s' is wrong answer ;(. Correct answer was '%s'.\nLet's try again, {$playerName}!", $answer, $correctAnswer);
+            return line(
+                "Answer '%s' is wrong answer ;(. Correct answer was '%s'.\nLet's try again, %s!",
+                $answer,
+                $correctAnswer,
+                $playerName
+            );
         }
         line("Correct!");
     }
