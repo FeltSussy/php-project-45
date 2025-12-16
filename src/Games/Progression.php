@@ -4,11 +4,11 @@ namespace BrainGames\Games\Progression;
 
 use function BrainGames\Engine\runGame;
 
-use const BrainGames\Engine\ROUNDS;
+const GAME_DESCRIPTION = 'What number is missing in the progression?';
+const ROUNDS = 3;
 
-function runBrainProgression(): void
+function run(): void
 {
-    $task = 'What number is missing in the progression?';
     $progressions = [];
     $indexesOfHiddenElements = [];
     $questions = [];
@@ -25,7 +25,7 @@ function runBrainProgression(): void
         $shownProgressions[$a][$indexesOfHiddenElements[$a]] = '..';
         $questions[] = implode(' ', $shownProgressions[$a]);
     };
-    runGame($task, $correctAnswers, $questions);
+    runGame(GAME_DESCRIPTION, $correctAnswers, $questions);
 }
 
 function generateProgressionElement(int $start, int $index, int $step): int

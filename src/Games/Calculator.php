@@ -2,34 +2,30 @@
 
 namespace BrainGames\Games\Calc;
 
+use Exception;
 use function BrainGames\Engine\runGame;
 
-use const BrainGames\Engine\ROUNDS;
+const GAME_DESCRIPTION = 'What is the result of the expression?';
+CONST OPERATORS = ['+', '-', '*'];
+const ROUNDS = 3;
 
-function runBrainCalc(): void
+function run(): void
 {
-    $task = 'What is the result of the expression?';
-    $numbers = generateRand(6);
-    $operators = ['+', '-', '*'];
     $operations = [];
-    while (\count($operations) !== ROUNDS) {
-         $operations[] = $operators[array_rand($operators, 1)];
-    }
     $questions = [];
     $correctAnswers = [];
-
+    $numbers = [];
     for ($a = 0, $b = 1, $c = 0; $c < ROUNDS; $a += 2, $b += 2, $c++) {
+        array_push($numbers, ...generateRand(2));
+        $operations[] = OPERATORS[array_rand(OPERATORS, 1)];
         $questions[] = match ($operations[$c]) {
             '+' => "{$numbers[$a]} + {$numbers[$b]}",
             '-' => "{$numbers[$a]} - {$numbers[$b]}",
             '*' => "{$numbers[$a]} * {$numbers[$b]}",
         };
-    };
-
-    for ($a = 0, $b = 1, $c = 0; $c < ROUNDS; $a += 2, $b += 2, $c++) {
         $correctAnswers[] = (string) calculate($numbers[$a], $numbers[$b], $operations[$c]);
-    };
-    runGame($task, $correctAnswers, $questions);
+    }
+    runGame(GAME_DESCRIPTION, $correctAnswers, $questions);
 }
 
 function generateRand(int $count): array
@@ -41,12 +37,12 @@ function generateRand(int $count): array
     return $array;
 }
 
-function calculate(int $num1, int $num2, string $operator): int|string
+function calculate(int $num1, int $num2, string $operator): int
 {
     return match ($operator) {
         '+' => $num1 + $num2,
         '-' => $num1 - $num2,
         '*' => $num1 * $num2,
-        default => "Allowed operators: '+', '-', '*'",
+        default => throw new Exception("Allowed operators: '+', '-', '*'"),
     };
 }
