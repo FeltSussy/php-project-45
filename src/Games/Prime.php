@@ -13,11 +13,8 @@ function run(): void
     $correctAnswers = [];
     for ($i = 0; $i < ROUNDS; $i++) {
         $questions[] = random_int(1, 100);
-        $correctAnswers[] = match (isPrime($questions[$i])) {
-            true => 'yes',
-            false => 'no',
-        };
-    };
+        $correctAnswers[] = isPrime($questions[$i]) ? "yes" : "no";
+    }
     runGame(GAME_DESCRIPTION, $correctAnswers, $questions);
 }
 

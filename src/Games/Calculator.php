@@ -12,30 +12,16 @@ const ROUNDS = 3;
 
 function run(): void
 {
-    $operations = [];
     $questions = [];
     $correctAnswers = [];
-    $numbers = [];
-    for ($a = 0, $b = 1, $c = 0; $c < ROUNDS; $a += 2, $b += 2, $c++) {
-        array_push($numbers, ...generateRand(2));
-        $operations[] = OPERATORS[array_rand(OPERATORS, 1)];
-        $questions[] = match ($operations[$c]) {
-            '+' => "{$numbers[$a]} + {$numbers[$b]}",
-            '-' => "{$numbers[$a]} - {$numbers[$b]}",
-            '*' => "{$numbers[$a]} * {$numbers[$b]}",
-        };
-        $correctAnswers[] = (string) calculate($numbers[$a], $numbers[$b], $operations[$c]);
+    for ($i = 0; $i < ROUNDS; $i++) {
+        $num1 = random_int(1, 100);
+        $num2 = random_int(1, 100);
+        $operator = OPERATORS[array_rand(OPERATORS, 1)];
+        $questions[] = "{$num1} {$operator} {$num2}";
+        $correctAnswers[] = (string) calculate($num1, $num2, $operator);
     }
     runGame(GAME_DESCRIPTION, $correctAnswers, $questions);
-}
-
-function generateRand(int $count): array
-{
-    $array = [];
-    for ($i = 0; $i < $count; $i++) {
-        $array[] = random_int(1, 100);
-    }
-    return $array;
 }
 
 function calculate(int $num1, int $num2, string $operator): int

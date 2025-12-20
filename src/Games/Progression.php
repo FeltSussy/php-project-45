@@ -24,7 +24,7 @@ function run(): void
         $shownProgressions = $progressions;
         $shownProgressions[$a][$indexesOfHiddenElements[$a]] = '..';
         $questions[] = implode(' ', $shownProgressions[$a]);
-    };
+    }
     runGame(GAME_DESCRIPTION, $correctAnswers, $questions);
 }
 

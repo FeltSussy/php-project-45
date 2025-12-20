@@ -9,13 +9,13 @@ const ROUNDS = 3;
 
 function run(): void
 {
-    $numbers = [];
     $questions = [];
     $correctAnswers = [];
-    for ($i = 0, $a = 0, $b = 1; $i < ROUNDS; $i++, $a += 2, $b += 2) {
-        array_push($numbers, ...generateRand(2));
-        $questions[] = "{$numbers[$a]} {$numbers[$b]}";
-        $correctAnswers[] = (string) findGcd($numbers[$a], $numbers[$b]);
+    for ($i = 0; $i < ROUNDS; $i++) {
+        $num1 = random_int(1, 100);
+        $num2 = random_int(1, 100);
+        $questions[] = "{$num1} {$num2}";
+        $correctAnswers[] = (string) findGcd($num1, $num2);
     }
     runGame(GAME_DESCRIPTION, $correctAnswers, $questions);
 }
@@ -34,13 +34,4 @@ function findGcd(int $firstNumber, int $secondNumber): int
         $secondNumber = $tempVariable;
     }
     return $firstNumber;
-}
-
-function generateRand(int $count): array
-{
-    $array = [];
-    for ($i = 0; $i < $count; $i++) {
-        $array[] = random_int(1, 100);
-    }
-    return $array;
 }
