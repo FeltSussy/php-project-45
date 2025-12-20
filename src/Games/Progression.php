@@ -18,7 +18,7 @@ function run(): void
         $step = random_int(1, 10);
         for ($i = 0; $i < $length; $i++) {
             $progressions[$a][] = generateProgressionElement($start, $i, $step);
-        };
+        }
         $indexesOfHiddenElements[] = random_int(0, $length - 1);
         $correctAnswers[] = (string) $progressions[$a][$indexesOfHiddenElements[$a]];
         $shownProgressions = $progressions;
